@@ -1,2 +1,2 @@
 # webScrapper
- A website extenstion for searching
+ An Amazon website extenstion for searching products anlong with their prices.
