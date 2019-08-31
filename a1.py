@@ -1,17 +1,26 @@
 import requests
 from bs4 import BeautifulSoup
 
+URL= 'https://www.amazon.in/s?k=keyword&ref=nb_sb_noss_2'
+
 headers={"User-Agent" : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
-text=requests.get('https://www.amazon.in/s?k=mobile&ref=nb_sb_noss_2', headers=headers)
 
+
+keyword = input("Enter the item the you want to search: ")
+keyword=keyword.strip().replace(" ","+")
+URL=URL.replace("keyword" , keyword)
+
+text=requests.get(URL, headers=headers)
 soup = BeautifulSoup(text.content, 'html.parser')
-tittle = soup.findAll("span" , {"class" : 'a-size-medium a-color-base a-text-normal'})
-price = soup.findAll("span" , {"class" : 'a-price-whole'})
 
-num = len(tittle)
+tittle = soup.findAll("a" , {"class" : 'a-link-normal a-text-normal'})
+price = soup.findAll("span" , {"class" : 'a-offscreen'})
 
-for i in range(num):
+num=1
+for item_links in tittle:
         print("-----------------------Item----------------------")
-        print(tittle[i].text.strip())
+        item_name = item_links.span
+        print(item_name.text)
         print("-----------------------Price---------------------")
-        print(price[i].text)
+        print(price[num].text)
+        num = num+1
