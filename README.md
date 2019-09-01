@@ -1,2 +1,2 @@
 # webScrapper
- An Amazon website extenstion for searching products anlong with their prices.
+ An Amazon searcher for searching products anlong with their prices directly from command prompt.
